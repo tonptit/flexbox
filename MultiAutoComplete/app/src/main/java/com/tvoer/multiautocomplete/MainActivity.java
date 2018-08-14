@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Do something useful if you wish.
-                // Or override it in TextWatcherExtended class if want to avoid it here
+                
             }
         });
     }
