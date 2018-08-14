@@ -2,6 +2,7 @@ package com.tvoer.multiautocomplete;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -38,12 +39,32 @@ public class MainActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int count = flexBox.getChildCount();
-                if (count - 2 >= 0) {
-                    flexBox.removeViewAt(count - 2);
-                }
+                deleteFlexBoxItem();
             }
         });
+
+        edtName.addTextChangedListener(new TextWatcherExtended() {
+            @Override
+            public void afterTextChanged(Editable s, boolean backSpace) {
+                // Here you are! You got missing "backSpace" flag
+                if (backSpace) {
+                    deleteFlexBoxItem();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Do something useful if you wish.
+                // Or override it in TextWatcherExtended class if want to avoid it here
+            }
+        });
+    }
+
+    private void deleteFlexBoxItem() {
+        int count = flexBox.getChildCount();
+        if (count - 2 >= 0) {
+            flexBox.removeViewAt(count - 2);
+        }
     }
 
     private void addNewContact() {
